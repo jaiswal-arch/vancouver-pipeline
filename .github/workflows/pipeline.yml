@@ -25,4 +25,6 @@ jobs:
         run: echo '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' > service_account.json
 
       - name: Run pipeline
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: service_account.json
         run: python pipeline.py
