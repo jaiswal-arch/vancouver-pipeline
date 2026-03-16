@@ -1,0 +1,28 @@
+name: Vancouver Parking Tickets Pipeline
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Runs every day at 8AM UTC
+  workflow_dispatch:       # Allows manual trigger from GitHub UI
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create service account key file
+        run: echo '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}' > service_account.json
+
+      - name: Run pipeline
+        run: python pipeline.py
