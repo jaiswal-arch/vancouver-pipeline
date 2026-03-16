@@ -7,7 +7,8 @@ import os
 PROJECT_ID   = "e-commerece-489804"
 DATASET_ID   = "vancouver_pipeline"
 TABLE_ID     = "parking_tickets"
-KEY_PATH     = r"C:\Users\archi\Documents\gcp_keys\service_account.json"
+KEY_PATH = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", 
+           r"C:\Users\archi\Documents\gcp_keys\service_account.json")
 FULL_TABLE   = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
 
 
